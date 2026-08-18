@@ -8,6 +8,7 @@ Clerkwork is a collection of reusable AI skills reflecting Patrick's engineering
 * [Install](#install)
 * [Update](#update)
 * [Skills](#skills)
+* [The cabinet of @davidsneighbour's skills](#the-cabinet-of-davidsneighbours-skills)
 
 ## Install
 
@@ -41,3 +42,11 @@ Use `--global` when the skills should be available outside the current project.
 * `clerkwork-work-on-issue` inspects a specific GitHub issue, implements the required change, validates, and commits with a closing reference.
 * `clerkwork-work-on-next-issue` orchestrates selecting and implementing the next suitable open GitHub issue.
 * `clerkwork-work-through-issues` continuously works through open GitHub issues until no suitable actionable issues remain.
+
+## The cabinet of @davidsneighbour's skills
+
+| Exhibit | Skill |
+| :---: | :--- |
+| [![](https://raw.githubusercontent.com/davidsneighbour/clerkwork/refs/heads/main/.github/assets/images/clerkwork-thumb.png)](https://github.com/davidsneighbour/clerkwork) | <h3>[Clerkwork](https://github.com/davidsneighbour/clerkwork)</h3> It's an engineers world. Start your engines, maintain, contrive, and put in the works. |
+| [![](https://raw.githubusercontent.com/davidsneighbour/idiolect/refs/heads/main/.github/assets/images/social.jpg)](https://github.com/davidsneighbour/idiolect) | <h3>[Idiolect](https://github.com/davidsneighbour/idiolect)</h3> Finding your own language in skill outputs. |
+| [![](https://raw.githubusercontent.com/davidsneighbour/posthaste/refs/heads/main/.github/assets/posthaste.jpg)](https://github.com/davidsneighbour/posthaste) | <h3>[Posthaste](https://github.com/davidsneighbour/posthaste)</h3> A collection of skills to post to social media of all kinds. |
