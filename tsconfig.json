@@ -1,0 +1,10 @@
+{
+  "extends": "@dnbhq/tsconfig/cli",
+  "compilerOptions": {
+    "allowUnreachableCode": true,
+    "exactOptionalPropertyTypes": false,
+    "noPropertyAccessFromIndexSignature": false
+  },
+  "include": ["skills/**/*.ts", "scripts/**/*.ts", ".release-it.ts"],
+  "exclude": ["node_modules", "dist"]
+}

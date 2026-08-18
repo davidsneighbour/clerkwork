@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use code or cite this website, please cite it as below."
+authors:
+  - family-names: "Kollitsch"
+    given-names: "Patrick"
+    orcid: "https://orcid.org/0000-0001-6250-2135"
+title: "Clerkwork"
+version: v0.1.0
+date-released: 2026-08-18
+url: "https://github.com/davidsneighbour/clerkwork"
+repository-code: "https://github.com/davidsneighbour/clerkwork"
+license: "MIT"
+commit: 0000000000000000000000000000000000000000
+keywords:
+  - ai
+  - engineering
+  - skill

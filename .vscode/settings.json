@@ -1,0 +1,12 @@
+{
+  "cSpell.customDictionaries": {
+    "clerkwork": {
+      "addWords": true,
+      "name": "clerkwork",
+      "path": "${workspaceFolder}/.vscode/dictionary.txt",
+      "scope": "workspace"
+    }
+  },
+  "cSpell.dictionaries": ["clerkwork"],
+  "cSpell.language": "en-GB"
+}

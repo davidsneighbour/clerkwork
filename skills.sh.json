@@ -1,0 +1,40 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Router",
+      "description": "Single entry point that routes short commands to the right Clerkwork skill.",
+      "skills": ["foreman"]
+    },
+    {
+      "title": "Repository Maintenance",
+      "description": "Skills for keeping dependencies, Node versions, and vulnerabilities current.",
+      "skills": [
+        "clerkwork-dependency-maintenance",
+        "clerkwork-manage-node-version-policy",
+        "clerkwork-osv-scan"
+      ]
+    },
+    {
+      "title": "Project Tracking",
+      "description": "Skills for reporting project state and triaging tracked work.",
+      "skills": [
+        "clerkwork-project-state-report",
+        "clerkwork-project-task-triage",
+        "clerkwork-resume-interrupted-work",
+        "clerkwork-github-label-classifier"
+      ]
+    },
+    {
+      "title": "Issue Workflow",
+      "description": "Skills for selecting and working through GitHub issues.",
+      "skills": [
+        "clerkwork-select-next-issue",
+        "clerkwork-work-on-issue",
+        "clerkwork-work-on-next-issue",
+        "clerkwork-work-through-issues"
+      ]
+    }
+  ]
+}

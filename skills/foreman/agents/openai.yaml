@@ -1,0 +1,4 @@
+interface:
+  display_name: "Foreman"
+  short_description: "Route Clerkwork skills from short commands"
+  default_prompt: "Use $foreman to figure out which Clerkwork skill handles this — audit, issues, status, or resume."

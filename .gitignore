@@ -1,0 +1,12 @@
+# Dependencies and generated output
+node_modules/
+dist/
+coverage/
+
+# Local environment and agent scratch files
+.env
+scratch/
+RESUME.md
+
+# Tool state
+.netlify/

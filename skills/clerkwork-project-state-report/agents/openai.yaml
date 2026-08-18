@@ -1,0 +1,4 @@
+interface:
+  display_name: "Clerkwork Project State Report"
+  short_description: "Report project changes and next actions."
+  default_prompt: "Use $clerkwork-project-state-report to refresh this repository and report what changed since yesterday."

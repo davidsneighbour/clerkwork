@@ -1,0 +1,134 @@
+version: 1
+syntax: "category:value"
+
+categories:
+  type:
+    meaning: "Primary nature of the work requested or required."
+    cardinality: exactly_one
+    required_when: "The issue represents actionable work."
+    optional_when: "The item is only a discussion or question and no actionable work has yet been defined."
+    labels:
+      bug:
+        name: "type:bug"
+        description: "Bugfixes in the codebase when something is not working correctly."
+      enhancement:
+        name: "type:enhancement"
+        description: "New enhancements and features not covered by a more specific type."
+      dependencies:
+        name: "type:dependencies"
+        description: "Dependencies and upstream updates."
+      documentation:
+        name: "type:documentation"
+        description: "Technical, project, process, reference, or usage documentation."
+      refactor:
+        name: "type:refactor"
+        description: "Internal code restructuring without an intended behaviour change."
+      data:
+        name: "type:data"
+        description: "Datasets, migrations, transformations, imports, exports, or data preparation."
+      tests:
+        name: "type:tests"
+        description: "Tests, test coverage, test infrastructure, or test maintenance."
+      chore:
+        name: "type:chore"
+        description: "Maintenance, housekeeping, or routine work not covered by another type."
+      security:
+        name: "type:security"
+        description: "Security vulnerabilities, hardening, access control, secrets, or security-sensitive behaviour."
+      performance:
+        name: "type:performance"
+        description: "Performance, speed, latency, resource usage, bundle size, throughput, or optimisation."
+      accessibility:
+        name: "type:accessibility"
+        description: "Accessibility compliance, semantics, contrast, keyboard, or assistive-technology support."
+      design:
+        name: "type:design"
+        description: "Visual design, themes, styling, layout, branding, interaction presentation, or design systems."
+      content:
+        name: "type:content"
+        description: "User-facing editorial, marketing, or informational content and its organisation."
+
+  status:
+    meaning: "Current lifecycle state of the issue in the working process."
+    cardinality: exactly_one
+    required_when: "The issue is open."
+    optional_when: "The issue is closed and resolution is the authoritative closure classification."
+    labels:
+      unconfirmed:
+        name: "status:unconfirmed"
+        description: "Reported but not yet confirmed."
+      confirmed:
+        name: "status:confirmed"
+        description: "Confirmed and accepted as valid work, but not yet in active implementation."
+      in-progress:
+        name: "status:in-progress"
+        description: "Work is currently in progress."
+      blocked:
+        name: "status:blocked"
+        description: "Work cannot continue because of another issue, dependency, missing information, or decision."
+      review:
+        name: "status:review"
+        description: "Work is ready for review or validation."
+      done:
+        name: "status:done"
+        description: "Work is finished, but the issue remains open pending merge, push, deployment, or closure."
+
+  resolution:
+    meaning: "Reason and outcome under which a closed issue was closed."
+    cardinality: exactly_one
+    required_when: "The issue is closed."
+    forbidden_when: "The issue is open."
+    labels:
+      duplicate:
+        name: "resolution:duplicate"
+        description: "Closed because the issue already exists elsewhere."
+      invalid:
+        name: "resolution:invalid"
+        description: "Closed because the report or request is not valid."
+      wont-fix:
+        name: "resolution:wont-fix"
+        description: "Closed with a deliberate decision not to implement or fix the understood issue."
+      cancelled:
+        name: "resolution:cancelled"
+        description: "Closed because previously intended or accepted work was withdrawn before completion."
+      superseded:
+        name: "resolution:superseded"
+        description: "Closed because another decision, implementation, issue, or approach replaced this work."
+      completed:
+        name: "resolution:completed"
+        description: "Closed because the work was completed."
+
+  prio:
+    meaning: "Deliberate priority based on impact, urgency, and scheduling intent."
+    cardinality: exactly_one
+    required_when: "The issue is open."
+    optional_when: "The issue is closed."
+    labels:
+      critical:
+        name: "prio:critical"
+        description: "Requires immediate attention."
+      high:
+        name: "prio:high"
+        description: "High priority."
+      medium:
+        name: "prio:medium"
+        description: "Medium priority."
+      low:
+        name: "prio:low"
+        description: "Low priority, including the default when no higher priority is supported."
+
+  meta:
+    meaning: "Additional workflow, discussion, or collaboration properties."
+    cardinality: zero_or_more
+    required_when: null
+    optional_when: "No listed modifier currently applies."
+    labels:
+      question:
+        name: "meta:question"
+        description: "Further clarification or discussion is needed."
+      help-wanted:
+        name: "meta:help-wanted"
+        description: "External or additional help is welcome."
+      keep-open:
+        name: "meta:keep-open"
+        description: "Keep the issue open intentionally."
