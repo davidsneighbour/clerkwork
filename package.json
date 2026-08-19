@@ -31,7 +31,7 @@
     "synchwork": "meld ~/github.com/davidsneighbour/clerkwork ~/github.com/davidsneighbour/idiolect ~/github.com/davidsneighbour/posthaste"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.7",
+    "@biomejs/biome": "2.5.9",
     "@dnbhq/biome-config": "0.2.3",
     "@dnbhq/markdownlint-config": "0.2.11",
     "@dnbhq/release-config": "1.1.3",
@@ -39,7 +39,7 @@
     "@release-it/conventional-changelog": "12.0.0",
     "@types/node": "26.2.0",
     "cspell": "10.0.1",
-    "release-it": "21.0.1",
+    "release-it": "21.0.2",
     "typescript": "7.0.2"
   },
   "cspell": {
