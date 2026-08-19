@@ -1,4 +1,4 @@
-![clerkwork and foreman](.github/assets/clerkwork.png)
+![clerkwork and foreman](.github/assets/images/skillwerk/clerkwork.png)
 
 ## AI skills for software engineering workflows
 
@@ -47,6 +47,6 @@ Use `--global` when the skills should be available outside the current project.
 
 | Exhibit | Skill |
 | :---: | :--- |
-| [![](https://raw.githubusercontent.com/davidsneighbour/clerkwork/refs/heads/main/.github/assets/images/clerkwork-thumb.png)](https://github.com/davidsneighbour/clerkwork) | <h3>[Clerkwork](https://github.com/davidsneighbour/clerkwork)</h3> It's an engineers world. Start your engines, maintain, contrive, and put in the works. |
-| [![](https://raw.githubusercontent.com/davidsneighbour/idiolect/refs/heads/main/.github/assets/images/social.jpg)](https://github.com/davidsneighbour/idiolect) | <h3>[Idiolect](https://github.com/davidsneighbour/idiolect)</h3> Finding your own language in skill outputs. |
-| [![](https://raw.githubusercontent.com/davidsneighbour/posthaste/refs/heads/main/.github/assets/posthaste.jpg)](https://github.com/davidsneighbour/posthaste) | <h3>[Posthaste](https://github.com/davidsneighbour/posthaste)</h3> A collection of skills to post to social media of all kinds. |
+| [![](.github/assets/images/skillwerk/clerkwork-thumb.png)](https://github.com/davidsneighbour/clerkwork) | **[Clerkwork](https://github.com/davidsneighbour/clerkwork):** It's an engineers world. Start your engines, maintain, contrive, and put in the works. |
+| [![](.github/assets/images/skillwerk/idiolect-thumb.png)](https://github.com/davidsneighbour/idiolect) | **[Idiolect](https://github.com/davidsneighbour/idiolect):** Finding your own language in skill outputs. |
+| [![](.github/assets/images/skillwerk/posthaste-thumb.png)](https://github.com/davidsneighbour/posthaste) | **[Posthaste](https://github.com/davidsneighbour/posthaste):** A collection of skills to post to social media of all kinds. |

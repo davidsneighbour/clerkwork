@@ -14,6 +14,7 @@ import { join } from "node:path";
 
 const CLAUDE_MARKETPLACE = ".claude-plugin/marketplace.json";
 const SKILLS_SH_MANIFEST = "skills.sh.json";
+const VALIDATOR_CONFIG = join("scripts", "validate-skills.config.json");
 
 const NAME_MAX = 64;
 const DESCRIPTION_MAX = 1024;
@@ -22,11 +23,18 @@ const OPENAI_SHORT_DESCRIPTION_MAX = 64;
 // Lowercase alphanumerics in hyphen-separated groups: no leading, trailing or
 // doubled hyphen, which is every rule the spec puts on `name` bar its length.
 const NAME_PATTERN = /^[a-z0-9]+(-[a-z0-9]+)*$/;
-const EXPLICIT_ONLY_SKILLS: string[] = [];
 
 type Frontmatter = {
   description?: string;
   name?: string;
+};
+
+type PackageJson = {
+  name?: unknown;
+};
+
+type ValidatorConfig = {
+  explicitOnlySkills?: unknown;
 };
 
 type OpenAiMetadata = {
@@ -182,6 +190,18 @@ const readJson = <Value>(path: string): Value | null => {
   }
 };
 
+const readOptionalJson = <Value>(path: string): Value | null => {
+  if (!existsSync(path)) return null;
+  return readJson<Value>(path);
+};
+
+const packageNameSlug = (name: unknown): string | null => {
+  if (typeof name !== "string" || !name) return null;
+
+  const slug = name.includes("/") ? name.split("/").at(-1) : name;
+  return slug && NAME_PATTERN.test(slug) ? slug : null;
+};
+
 const validateListedSlugs = (
   manifestPath: string,
   listed: string[],
@@ -207,6 +227,42 @@ const slugs = readdirSync("skills", { withFileTypes: true })
   .filter((entry) => entry.isDirectory() && !entry.name.startsWith("."))
   .map((entry) => entry.name)
   .sort();
+
+const packageJson = readOptionalJson<PackageJson>("package.json");
+const repositoryPackageName = packageNameSlug(packageJson?.name);
+if (!repositoryPackageName) {
+  fail(
+    "package.json",
+    "`name` must identify the repository package name, such as @scope/example-skill",
+  );
+}
+
+const validatorConfig = readOptionalJson<ValidatorConfig>(VALIDATOR_CONFIG);
+const explicitOnlySkills = validatorConfig?.explicitOnlySkills ?? [];
+if (!Array.isArray(explicitOnlySkills)) {
+  fail(VALIDATOR_CONFIG, "`explicitOnlySkills` must be an array");
+}
+const explicitOnlySkillSlugs = Array.isArray(explicitOnlySkills)
+  ? explicitOnlySkills.flatMap((skill) => {
+      if (typeof skill === "string") return skill;
+      fail(VALIDATOR_CONFIG, "`explicitOnlySkills` entries must be strings");
+      return [];
+    })
+  : [];
+for (const skill of duplicates(explicitOnlySkillSlugs)) {
+  fail(
+    VALIDATOR_CONFIG,
+    `explicitOnlySkills entry \`${skill}\` is listed more than once`,
+  );
+}
+for (const skill of explicitOnlySkillSlugs) {
+  if (!slugs.includes(skill)) {
+    fail(
+      VALIDATOR_CONFIG,
+      `explicitOnlySkills entry \`${skill}\` has no skills/${skill}`,
+    );
+  }
+}
 
 for (const slug of slugs) {
   const path = join("skills", slug, "SKILL.md");
@@ -284,7 +340,7 @@ for (const slug of slugs) {
     fail(openAiPath, `interface.default_prompt must mention $${slug}`);
   }
 
-  if (EXPLICIT_ONLY_SKILLS.includes(slug)) {
+  if (explicitOnlySkillSlugs.includes(slug)) {
     if (openAiPolicy?.allow_implicit_invocation !== false) {
       fail(
         openAiPath,
@@ -337,13 +393,16 @@ if (claudeMarketplace) {
     : [];
 
   if (plugins.length !== 1) {
-    fail(CLAUDE_MARKETPLACE, "expected exactly one Clerkwork plugin entry");
+    fail(CLAUDE_MARKETPLACE, "expected exactly one plugin entry");
   }
 
   const [plugin] = plugins;
   if (plugin) {
-    if (plugin.name !== "clerkwork") {
-      fail(CLAUDE_MARKETPLACE, 'plugin `name` must be "clerkwork"');
+    if (repositoryPackageName && plugin.name !== repositoryPackageName) {
+      fail(
+        CLAUDE_MARKETPLACE,
+        `plugin \`name\` must match repository package name "${repositoryPackageName}"`,
+      );
     }
     if (plugin.source !== "./") {
       fail(CLAUDE_MARKETPLACE, 'plugin `source` must be "./"');

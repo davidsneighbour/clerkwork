@@ -27,7 +27,8 @@
     "release:patch": "release-it --config .release-it.ts --ci --increment=patch",
     "test": "node --test \"skills/**/*.test.ts\"",
     "validate:skills": "node scripts/validate-skills.ts",
-    "typecheck": "tsc --project tsconfig.json --noEmit"
+    "typecheck": "tsc --project tsconfig.json --noEmit",
+    "synchwork": "meld ~/github.com/davidsneighbour/clerkwork ~/github.com/davidsneighbour/idiolect ~/github.com/davidsneighbour/posthaste"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.7",
@@ -54,13 +55,13 @@
     ],
     "dictionaryDefinitions": [
       {
-        "name": "clerkwork",
+        "name": "workspace-dictionary",
         "path": "./.vscode/dictionary.txt",
         "addWords": true
       }
     ],
     "dictionaries": [
-      "clerkwork"
+      "workspace-dictionary"
     ]
   }
 }
