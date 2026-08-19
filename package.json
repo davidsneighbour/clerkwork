@@ -1,6 +1,6 @@
 {
   "name": "@davidsneighbour/clerkwork",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "description": "Reusable AI skills for software engineering workflows: dependency maintenance, issue triage, project tracking, and repository upkeep.",
   "type": "module",
