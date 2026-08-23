@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "clerkwork",
   "description": "Clerkwork skills for dependency maintenance, GitHub issue triage, project tracking, and repository upkeep.",
   "owner": {

@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.0.1](https://github.com/davidsneighbour/clerkwork/compare/v1.0.0...v1.0.1) (2026-08-23)
+
+### Docs
+
+* update cabinet ([61742c3](https://github.com/davidsneighbour/clerkwork/commit/61742c3505a6683eebab97184e60265f23a97b55))
+
+### Build
+
+* **deps:** update dependencies ([8a6828f](https://github.com/davidsneighbour/clerkwork/commit/8a6828f916d3a1a61595538f2d81913bb74c1532))
+* **vscode:** update workspace configuration ([b74f8fd](https://github.com/davidsneighbour/clerkwork/commit/b74f8fd5dd22039d99edf9ea0adedb1bd94f19fa))
+
+### Chore
+
+* update social image setup ([f8cf796](https://github.com/davidsneighbour/clerkwork/commit/f8cf7969b5abee9aad60e27844d7565c899aa26a))
+
 ## 1.0.0 (2026-08-19)
 
 ### Feat
