@@ -1,0 +1,18 @@
+{
+  "repositories": [
+    "~/github.com/davidsneighbour/clerkwork",
+    "~/github.com/davidsneighbour/gallimaufry",
+    "~/github.com/davidsneighbour/gazetteer",
+    "~/github.com/davidsneighbour/idiolect",
+    "~/github.com/davidsneighbour/patternbook",
+    "~/github.com/davidsneighbour/posthaste"
+  ],
+  "scripts": [
+    ["clerkwork", ["patternbook", "posthaste", "clerkwork"]],
+    ["gallimaufry", ["clerkwork", "posthaste", "gallimaufry"]],
+    ["gazetteer", ["clerkwork", "posthaste", "gazetteer"]],
+    ["idiolect", ["clerkwork", "posthaste", "idiolect"]],
+    ["patternbook", ["clerkwork", "posthaste", "patternbook"]],
+    ["posthaste", ["clerkwork", "patternbook", "posthaste"]]
+  ]
+}
