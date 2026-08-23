@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.2](https://github.com/davidsneighbour/clerkwork/compare/v1.0.1...v1.0.2) (2026-08-23)
+
+### Build
+
+* **deps:** update dependencies ([fd0d5e0](https://github.com/davidsneighbour/clerkwork/commit/fd0d5e07392d922040f4747623851e97d73d7215))
+
 ## [1.0.1](https://github.com/davidsneighbour/clerkwork/compare/v1.0.0...v1.0.1) (2026-08-23)
 
 ### Docs
