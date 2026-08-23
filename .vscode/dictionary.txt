@@ -1,5 +1,6 @@
 addext
 clerkwork
+crawlability
 crosspost
 Crosspost
 CROSSPOST
@@ -10,6 +11,8 @@ dialog
 dnb
 dnbhq
 frontmatter
+gazetteer
+Gazetteer
 handoff
 humanwhocodes
 idiolect
@@ -31,12 +34,15 @@ orcid
 osv
 overfit
 parentheticals
+patternbook
+Patternbook
 Posthaste
 quot
 reposetup
 sendreplies
 smol
 subj
+synchwork
 tricolon
 vars
 worktree
