@@ -8,6 +8,11 @@
       "skills": ["foreman"]
     },
     {
+      "title": "Agent Instructions",
+      "description": "Skills for aligning repository instruction files across agents.",
+      "skills": ["clerkwork-agent-align"]
+    },
+    {
       "title": "Repository Maintenance",
       "description": "Skills for keeping dependencies, Node versions, and vulnerabilities current.",
       "skills": [

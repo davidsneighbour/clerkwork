@@ -37,6 +37,17 @@ when the action is missing.
 * `security` → `clerkwork-osv-scan`
 * `node` (or "node version(s)") → `clerkwork-manage-node-version-policy`
 
+### `agent-align` — align repository agent instruction files
+
+Route to `clerkwork-agent-align` only when the request explicitly asks to
+`onboard clerkwork`, asks for `agent alignment`, or names `agent-align`.
+The target skill must ask the user to confirm before it inspects or changes
+repository instruction files.
+
+Do not route general onboarding, setup, documentation, agent, instruction, or
+configuration requests to this skill unless they include one of those exact
+intents.
+
 ### `issues` — issue tracker workflow
 
 Ask "What do you want to do with issues: select the next one, work the next
