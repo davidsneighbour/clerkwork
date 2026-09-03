@@ -7,9 +7,7 @@
       "scope": "workspace"
     }
   },
-  "cSpell.dictionaries": [
-    "workspace-dictionary"
-  ],
+  "cSpell.dictionaries": ["workspace-dictionary"],
   "cSpell.language": "en-GB",
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#ccefc8",
