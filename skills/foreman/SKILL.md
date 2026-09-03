@@ -3,6 +3,7 @@ id: foreman
 name: foreman
 title: Foreman
 description: Route Clerkwork engineering skills from short command-style requests such as `foreman audit packages` or `foreman issues next`. Use when the user addresses foreman directly, or asks to audit the repository, work through GitHub issues, check project status, or otherwise wants Clerkwork to decide which skill handles a task. Asks a clarifying question whenever the area or action is missing or ambiguous, and never performs the underlying work itself.
+argument-hint: "<audit|agent-align|issues|status|resume> [target]"
 ---
 
 Use this router skill whenever the user addresses `foreman` or otherwise asks
