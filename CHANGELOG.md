@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.1.0](https://github.com/davidsneighbour/clerkwork/compare/v1.0.2...v1.1.0) (2026-09-03)
+
+### Feat
+
+* **clerkwork-agent-align:** add agent alignment skill ([016fa96](https://github.com/davidsneighbour/clerkwork/commit/016fa969b20bb25d6c87e84c012ca6b066c4ceaf)), closes [#3](https://github.com/davidsneighbour/clerkwork/issues/3)
+
+### Fix
+
+* cleanup CITATION.cff ([7ec00b0](https://github.com/davidsneighbour/clerkwork/commit/7ec00b0bff4e3b16f848d02795217a9b295129af))
+* **foreman:** add argument hints ([841bda4](https://github.com/davidsneighbour/clerkwork/commit/841bda46365ddb61642e93a3fd2246405f179608))
+
+### Build
+
+* **deps:** update dependencies ([d363c89](https://github.com/davidsneighbour/clerkwork/commit/d363c897b8b13cef52043d8a492deb6d3a2c9701))
+
+### Chore
+
+* **project:** commit triage snapshot ([e225890](https://github.com/davidsneighbour/clerkwork/commit/e225890083b15ba27b7c1041215c97a419a31c48)), closes [#4](https://github.com/davidsneighbour/clerkwork/issues/4)
+
 ## [1.0.2](https://github.com/davidsneighbour/clerkwork/compare/v1.0.1...v1.0.2) (2026-08-23)
 
 ### Build
