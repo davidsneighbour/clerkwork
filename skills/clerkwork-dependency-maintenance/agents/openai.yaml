@@ -1,0 +1,4 @@
+interface:
+  display_name: "Clerkwork dependency maintenance"
+  short_description: "Maintain npm dependencies safely"
+  default_prompt: "Use $clerkwork-dependency-maintenance to inspect and safely update npm dependencies in this repository."

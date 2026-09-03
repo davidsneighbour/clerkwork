@@ -1,0 +1,4 @@
+interface:
+  display_name: "Clerkwork work on next issue"
+  short_description: "Select and implement next issue"
+  default_prompt: "Use $clerkwork-work-on-next-issue to select the next suitable GitHub issue and implement it."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Clerkwork GitHub label classifier"
+  short_description: "Classify GitHub issues with labels"
+  default_prompt: "Use $clerkwork-github-label-classifier to classify GitHub issues with the repository label taxonomy."
