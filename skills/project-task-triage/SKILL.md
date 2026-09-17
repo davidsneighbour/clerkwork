@@ -24,6 +24,9 @@ This repository uses three tracking layers:
 
    - It is a quick local cache of the current GitHub issue state.
    - It must list every relevant open GitHub issue.
+   - It must never list a closed issue as an entry, regardless of why it was closed or how recently.
+   - It only points forward. It is not a progress log, changelog, or record of what was already done, so a closed issue never earns a place in it, not even as a "done" or struck-through entry.
+   - If a closed issue is a subtask of an open parent issue, do not list the closed subtask on its own. Instead, summarise progress on the parent's entry, for example "3 of 5 subtasks closed", and let the parent issue's own subtask list (in GitHub) carry the detail.
    - It may group issues by topic, priority, type, phase, or recommended execution order.
    - It should include short notes explaining the purpose, risk, dependency, or expected impact of each issue.
    - It should include a short project-state summary at the top.
@@ -132,11 +135,13 @@ DO NOT commit `/PROJECT.md` or `/TODO.md` as part of the migration.
 3. Reconcile GitHub Issues with `/PROJECT.md`.
 
    - Ensure every relevant open GitHub issue is listed in `/PROJECT.md`.
-   - Remove closed, completed, duplicate, or obsolete issues from `/PROJECT.md`.
+   - Remove closed, completed, duplicate, or obsolete issues from `/PROJECT.md`. This applies unconditionally, including issues closed during this same run.
    - If an issue appears in `/PROJECT.md` but no longer exists or is closed, remove it from `/PROJECT.md`.
    - If an issue is open in GitHub but missing from `/PROJECT.md`, add it.
+   - If a closed issue is a subtask of an open parent, do not re-add it to `/PROJECT.md`; instead update the parent's entry to reflect subtask progress (for example "3 of 5 subtasks closed").
    - If work is clearly complete but the GitHub issue is still open, close the issue with a short explanation.
    - Do not close issues when completion is uncertain. Add a note or clarification question instead.
+   - Other skills may edit `/PROJECT.md` between triage runs and check off a task's checkbox (for example `- [x] ...`) instead of removing the entry. Treat any checked-off entry found in `/PROJECT.md` as done: remove that entry entirely on this run, and if it corresponds to an open GitHub issue whose work is clearly complete, close that issue with a short explanation. Never leave a checked-off entry in the regenerated file, and never render one as a struck-through or "completed" line either — the same forward-only rule applies regardless of which tool checked the box.
 
 4. Reconcile `/TODO.md` with GitHub Issues.
 
@@ -204,7 +209,7 @@ DO NOT commit `/PROJECT.md` or `/TODO.md` as part of the migration.
 
 8. Regenerate `/PROJECT.md`.
 
-   - Rebuild `/PROJECT.md` from the current GitHub issue state.
+   - Rebuild `/PROJECT.md` from the current GitHub issue state, using only open issues. Closed issues never appear as entries, even the ones just closed in this run, and even as a "recently completed" or "done" section — `/PROJECT.md` points forward only, it does not track progress.
 
    - Start with a short project-state summary.
 
@@ -216,6 +221,7 @@ DO NOT commit `/PROJECT.md` or `/TODO.md` as part of the migration.
      - issue title
      - issue link
      - short notes explaining why it matters, what is blocked, what needs attention, or what the likely implementation path is
+     - if the issue has closed subtasks, a short progress note (for example "3 of 5 subtasks closed") instead of listing those closed subtasks separately
 
    - Add dependency notes where one issue should happen before another.
 
@@ -281,6 +287,8 @@ Do not implement source-code changes unless explicitly asked.
 Do not delete human notes from `/TODO.md` unless they are obsolete, duplicated, represented by a GitHub issue, or preserved in a more appropriate tracked location.
 
 Do not close GitHub Issues unless completion is clear from the repository state, issue discussion, or existing project files.
+
+Do not list a closed issue as an entry in `/PROJECT.md`, including closed subtasks of an open parent issue; summarise closed subtasks as a progress note on the parent instead. This also applies to entries any other skill left checked off (`- [x]`) in `/PROJECT.md` — remove them on the next triage run rather than keeping or re-checking them. `/PROJECT.md` reflects what is next, not what was done.
 
 Never stage or commit `/PROJECT.md` or `/TODO.md`.
 
