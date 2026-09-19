@@ -5,12 +5,17 @@
     {
       "title": "Router",
       "description": "Single entry point that routes short commands to the right Clerkwork skill.",
-      "skills": ["foreman"]
+      "skills": [
+        "foreman"
+      ]
     },
     {
       "title": "Agent Instructions",
-      "description": "Skills for aligning repository instruction files across agents.",
-      "skills": ["clerkwork-agent-align"]
+      "description": "Skills for aligning, auditing, and optimising repository agent instruction architecture.",
+      "skills": [
+        "clerkwork-agent-align",
+        "clerkwork-agent-instructions-audit"
+      ]
     },
     {
       "title": "Repository Maintenance",

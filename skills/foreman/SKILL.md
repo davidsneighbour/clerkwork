@@ -3,7 +3,7 @@ id: foreman
 name: foreman
 title: Foreman
 description: Route Clerkwork engineering skills from short command-style requests such as `foreman audit packages` or `foreman issues next`. Use when the user addresses foreman directly, or asks to audit the repository, work through GitHub issues, check project status, or otherwise wants Clerkwork to decide which skill handles a task. Asks a clarifying question whenever the area or action is missing or ambiguous, and never performs the underlying work itself.
-argument-hint: "<audit|agent-align|issues|status|resume> [target]"
+argument-hint: "<audit|agent-align|agent-instructions|issues|status|resume> [target]"
 ---
 
 Use this router skill whenever the user addresses `foreman` or otherwise asks
@@ -48,6 +48,14 @@ repository instruction files.
 Do not route general onboarding, setup, documentation, agent, instruction, or
 configuration requests to this skill unless they include one of those exact
 intents.
+
+### `agent-instructions` — audit or optimise instruction context
+
+Route requests to inspect, reduce, optimise, or audit agent-instruction context to `clerkwork-agent-instructions-audit`.
+
+A bare `foreman agent-instructions` defaults to the non-mutating audit mode. Route to optimisation mode only when the user explicitly asks to change, optimise, restructure, or fix the instruction architecture.
+
+If the audit finds that the canonical `AGENTS.md` / agent-adapter setup itself is structurally wrong, hand that structural repair to `clerkwork-agent-align` rather than duplicating alignment logic.
 
 ### `issues` — issue tracker workflow
 

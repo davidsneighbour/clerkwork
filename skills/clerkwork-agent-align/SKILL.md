@@ -35,7 +35,8 @@ This skill may create or update only:
 
 * `AGENTS.md`
 * `CLAUDE.md`
-* files below `.agents/instructions/`
+* files below `.agents/instructions/`;
+* files below `.agents/references/`
 
 It must not perform any other task.
 
@@ -66,26 +67,19 @@ Use this hierarchy:
 AGENTS.md
 CLAUDE.md
 .agents/
-└── instructions/
+├── instructions/
+│   ├── TOPIC.instructions.md
+│   └── ...
+└── references/
     ├── TOPIC.md
     └── ...
 ```
 
-Subdirectories below `.agents/instructions/` are encouraged where they make the instruction structure clearer, for example:
+Use `.agents/instructions/` only for automatically applicable behavioural rules whose applicability can be determined from file paths. Every instruction file MUST define a non-global `applyTo` scope.
 
-```text
-.agents/instructions/
-├── development/
-│   ├── testing.md
-│   └── dependencies.md
-├── repository/
-│   ├── commits.md
-│   └── issues.md
-└── documentation/
-    └── style.md
-```
+Use `.agents/references/` for specialised knowledge, procedures, framework notes, API guidance, or other task-triggered material that should be loaded only when the semantic nature of the task requires it. Reference files MUST NOT define `applyTo`.
 
-Do not create files or directories merely to satisfy this example. Structure them according to the actual repository instructions.
+Subdirectories below either directory are encouraged where they make ownership and discovery clearer. Do not create files or directories merely to satisfy this example. Structure them according to the actual repository needs.
 
 ## `AGENTS.md`: canonical source of truth
 
@@ -97,9 +91,11 @@ Rules:
 
 * `AGENTS.md` is the single source of truth for shared agent behaviour.
 * Instructions that apply to Claude, Codex, or other agents equally MUST NOT be duplicated into agent-specific files.
-* Keep `AGENTS.md` concise enough to serve as an effective entry point.
-* Move complex, specialised, or lengthy instruction sets into dedicated files below `.agents/instructions/`.
-* `AGENTS.md` MUST explicitly tell agents which additional instruction files they need to read and under what circumstances.
+* Keep `AGENTS.md` as small as practical because it is unconditional bootstrap context for every agent task.
+* Keep only genuinely universal behavioural rules in `AGENTS.md`.
+* Move file-scoped behavioural rules into `.agents/instructions/` with a precise, non-global `applyTo`.
+* Move task-specific specialised knowledge or procedures into `.agents/references/` and load them only when the task requires them.
+* `AGENTS.md` MUST explain the instruction/reference loading model, but it should not become a catalogue of every reference when a narrower scoped instruction can provide the task trigger.
 * Preserve existing useful repository-specific instructions while reorganising them according to this model.
 * Resolve duplicate or conflicting instructions rather than preserving multiple competing versions.
 * Do not silently discard meaningful existing instructions.
@@ -114,7 +110,7 @@ For example:
 Follow `.agents/instructions/repository/workflow.md` for repository, branch, commit, and push behaviour.
 ```
 
-Instruction files referenced by `AGENTS.md` are part of the canonical instruction set and MUST be treated with the same authority as instructions written directly in `AGENTS.md`.
+Scoped instruction files are part of the canonical instruction set and MUST be treated with the same authority as instructions written directly in `AGENTS.md` whenever their `applyTo` scope matches. Reference files provide specialised context when explicitly triggered; they do not become unconditional instructions merely because they exist.
 
 ## `CLAUDE.md`: claude-specific delta only
 
@@ -187,36 +183,51 @@ If both `AGENTS.md` and `CLAUDE.md` exist:
 6. Resolve contradictions deliberately, using repository evidence and the existing instruction intent.
 7. Do not leave duplicated policies in both files.
 
-## Modular instruction files
+## Scoped instructions and task references
 
-Use `.agents/instructions/$TOPIC.md` for instructions that are too substantial or specialised to belong directly in `AGENTS.md`.
+Use the following classification before extracting material from `AGENTS.md`.
 
-A deeper directory structure is preferred when several related topics exist.
+### `.agents/instructions/`
 
-Good candidates include:
+Instruction files contain behavioural rules that apply automatically because the files being worked on match a path or file-type scope.
 
-* repository workflow;
-* branching, commits, and pushing;
-* issue handling;
-* dependency management;
-* testing and quality gates;
-* coding conventions;
-* documentation conventions;
-* release procedures;
-* security requirements;
-* framework-specific development rules;
-* deployment;
-* content or editorial rules.
-
-Each extracted file should:
+Each instruction file MUST:
 
 * have one clear responsibility;
-* contain actionable instructions rather than background material;
-* avoid duplicating instructions from other files;
-* be referenced from `AGENTS.md`;
-* explain when it applies if it is conditional.
+* contain actionable behavioural instructions rather than background material;
+* define an `applyTo` pattern that is narrower than the whole repository;
+* avoid duplicating `AGENTS.md` or another instruction file;
+* use the narrowest practical scope that reliably describes when the rules apply.
 
-Do not hide critical baseline instructions several levels deep without making their applicability clear from `AGENTS.md`.
+Instruction files MUST NOT use repository-wide patterns such as `*`, `**`, `**/*`, or equivalent patterns that effectively match every working file. If a rule truly applies everywhere, keep the concise rule in `AGENTS.md`. If the material is too specialised or lengthy to justify unconditional context, move it to a reference instead.
+
+Treat very broad patterns that cover most source files as suspicious even when they are not syntactically global. Prefer narrower scopes or task-triggered references.
+
+### `.agents/references/`
+
+Reference files contain specialised knowledge or procedures whose applicability depends on what the agent is trying to accomplish rather than merely which file extension or directory it touches.
+
+Examples include library-specific guidance, keyboard-shortcut implementation notes, deployment internals, architecture explanations, API usage details, and specialised maintenance procedures.
+
+Reference files MUST:
+
+* have one clear topic;
+* contain no `applyTo` frontmatter;
+* be loaded only when a task requires that specialised context;
+* have a discoverable semantic trigger in `AGENTS.md` or, preferably, in the narrowest relevant scoped instruction;
+* avoid duplicating behavioural rules that belong in `AGENTS.md` or `.agents/instructions/`.
+
+Prefer placing a reference trigger in a scoped instruction when only that scope can lead to the task. This prevents `AGENTS.md` from growing into a universal index of cold reference material.
+
+### Classification rule
+
+Use this decision order:
+
+1. If a concise rule matters for essentially every task, keep it in `AGENTS.md`.
+2. If applicability can be determined from the files being worked on, put it in a scoped instruction with non-global `applyTo`.
+3. If applicability depends on the semantic kind of work, put it in a task-triggered reference.
+4. If the material is a reusable multi-step workflow rather than repository guidance, consider a skill instead.
+5. If the material is background documentation with no agent-specific behavioural purpose, keep it in ordinary repository documentation.
 
 ## Repository evidence
 
@@ -250,13 +261,21 @@ During onboarding:
 * remove unnecessary duplication;
 * consolidate shared behaviour;
 * separate Claude-specific behaviour cleanly;
-* extract complex topics where this improves maintainability;
-* update references when files are moved;
+* classify extracted material as scoped instruction or task-triggered reference rather than extracting by length alone;
+* update instruction and reference triggers when files are moved;
 * avoid creating dead or unreferenced instruction files;
 * avoid changing unrelated repository content;
 * retain existing terminology where it is deliberate and useful.
 
 If an existing instruction conflicts with this organisational model, preserve the behavioural requirement while moving it to the correct location.
+
+## Partnership with agent instruction audit
+
+`clerkwork-agent-align` owns structural alignment: the canonical `AGENTS.md` entry point, agent-specific adapters such as `CLAUDE.md`, and the required `.agents/instructions/` and `.agents/references/` architecture.
+
+`clerkwork-agent-instructions-audit` owns context-efficiency analysis and optimisation: deciding whether existing material belongs in bootstrap context, scoped instructions, task references, skills, or ordinary documentation; detecting duplication and over-broad scopes; and estimating unconditional context cost.
+
+When alignment is structurally wrong, repair it here. When the structure exists but is bloated, poorly scoped, duplicated, or expensive, use `clerkwork-agent-instructions-audit`.
 
 ## Commit handling
 
@@ -299,8 +318,10 @@ Before finishing, verify that:
 * `AGENTS.md` is the canonical source for shared agent instructions;
 * `CLAUDE.md` explicitly requires Claude to read and follow `AGENTS.md` before doing work;
 * `CLAUDE.md` contains no unnecessary copies of shared instructions;
-* complex extracted instructions live below `.agents/instructions/`;
-* every extracted instruction file that agents need is discoverable from `AGENTS.md`;
+* every file below `.agents/instructions/` has a precise non-global `applyTo`;
+* no instruction uses `*`, `**`, `**/*`, or an equivalent repository-wide scope;
+* task-triggered specialised material lives below `.agents/references/` without `applyTo`;
+* instruction and reference triggers are discoverable without forcing unrelated material into bootstrap context;
 * references point to files that actually exist;
 * no meaningful instructions were accidentally lost;
 * no contradictory duplicate policies remain.

@@ -15,6 +15,7 @@
       "skills": [
         "./skills/foreman",
         "./skills/clerkwork-agent-align",
+        "./skills/clerkwork-agent-instructions-audit",
         "./skills/clerkwork-dependency-maintenance",
         "./skills/clerkwork-github-label-classifier",
         "./skills/clerkwork-manage-node-version-policy",
