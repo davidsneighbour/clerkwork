@@ -1,0 +1,430 @@
+# Package registry
+
+Add one section per supported shared configuration package. This registry is the single source of truth for configurable packages handled by `dnbhq-configs`.
+
+Registry fields:
+
+- `Weight` is optional. Lower numbers run earlier during init. Packages without a weight keep registry order after weighted packages.
+- `Package resource` points to the package-specific workflow resource. Use `resources/packages/other.md` only for packages that do not yet justify a dedicated resource.
+- `Removable packages` identifies predecessor or duplicate packages that may be removed after repository evidence and current package documentation confirm they are unused.
+
+## `@dnbhq/browserslist-config`
+
+- Repository: `https://github.com/dnbhq/browserslist-config`
+- npm package: `@dnbhq/browserslist-config`
+- Package resource: `resources/packages/other.md`
+- Removable packages:
+  - None known; decide from repository evidence and package documentation.
+- Predecessors:
+  - None known.
+- Config files:
+  - `package.json` `browserslist` field
+  - `.browserslistrc`
+  - files that import or extend `@dnbhq/browserslist-config`
+- Integrations:
+  - build tools that read Browserslist
+  - CSS tooling
+  - JavaScript transpilation
+  - dependency update automation for `browserslist` and `caniuse-lite`
+- Authoritative documentation:
+  - repository `README.md`
+  - package changelog
+  - migration documents
+  - installed package `README.md`
+  - installed package `package.json` exports
+- Audit checks:
+  - confirm whether Browserslist is configured locally
+  - confirm whether local targets duplicate the shared package
+  - confirm installed `browserslist` compatibility
+  - check for stale `caniuse-lite` warnings in validation output
+- Migration rules:
+  - migrate local target lists only when the shared config provides equivalent coverage
+  - preserve project-specific browser support requirements
+  - do not remove framework-required Browserslist fields unless confirmed unused
+- Validation:
+  - `npx browserslist`
+- Coexistence:
+  - may coexist with build tools, CSS processors, transpilers, and framework defaults that consume Browserslist
+
+## `@dnbhq/renovate-config`
+
+- Repository: `https://github.com/dnbhq/renovate-config`
+- npm package: `@dnbhq/renovate-config`
+- Weight: `10`
+- Package resource: `resources/packages/renovate.md`
+- Removable packages:
+  - None known; do not remove dependency-update tooling unless replacement responsibilities are explicit.
+- Predecessors:
+  - None known.
+- Config files:
+  - `renovate.json`
+  - `renovate.json5`
+  - `.github/renovate.json`
+  - `.github/renovate.json5`
+- Integrations:
+  - Renovate app configuration
+  - GitHub repository settings
+  - dependency update workflow expectations
+- Authoritative documentation:
+  - repository `README.md`
+  - package changelog
+  - migration documents
+  - installed package `README.md`
+  - upstream `default.json`
+- Audit checks:
+  - confirm the repository extends the shared Renovate preset
+  - validate local overrides against Renovate's schema
+  - check for disabled or duplicated dependency dashboard settings
+  - check repository-specific schedules, timezone, and package rules
+- Migration rules:
+  - preserve repository-specific package rules and schedules
+  - remove duplicated defaults only after comparing against the shared preset
+  - do not change automerge policy without explicit user approval
+- Validation:
+  - `npx --yes renovate-config-validator .github/renovate.json5`
+- Coexistence:
+  - may coexist with repository-specific Renovate overrides
+  - may coexist with Dependabot only when responsibilities are intentionally separated
+
+## `@dnbhq/release-config`
+
+- Repository: `https://github.com/dnbhq/release-config`
+- npm package: `@dnbhq/release-config`
+- Package resource: `resources/packages/release.md`
+- Removable packages:
+  - local release-it configuration packages only when no scripts, configs, workflows, local scripts, or imports still reference them
+- Predecessors:
+  - local `release-it` configuration
+- Config files:
+  - `.release-it.ts`
+  - `.release-it.js`
+  - `.release-it.cjs`
+  - `.release-it.json`
+  - `package.json` `release-it` field
+- Integrations:
+  - `release-it`
+  - `@release-it/conventional-changelog`
+  - package release scripts
+  - GitHub and npm release workflows
+- Authoritative documentation:
+  - repository `README.md`
+  - package changelog
+  - migration documents
+  - installed package `README.md`
+  - installed package TypeScript declarations
+- Audit checks:
+  - confirm compatible `release-it` and `@release-it/conventional-changelog` versions
+  - inspect release scripts and CI release jobs
+  - check conventional commit scope requirements
+  - confirm npm provenance and package publishing expectations
+- Migration rules:
+  - preserve repository-specific release hooks, allowed scopes, and package metadata
+  - replace duplicated local release defaults only when the shared config covers them
+  - do not publish or tag during maintenance unless explicitly requested
+- Validation:
+  - `npm run release:dry`
+- Coexistence:
+  - may coexist with repository-local release configuration that imports and customizes the shared config
+  - may coexist with changelog tooling required by `release-it`
+
+## `@dnbhq/markdownlint-config`
+
+- Repository: `https://github.com/dnbhq/markdownlint-config`
+- npm package: `@dnbhq/markdownlint-config`
+- Package resource: `resources/packages/markdownlint.md`
+- Removable packages:
+  - markdownlint runtime or rule packages that the shared package documents as bundled, after confirming they are not locally referenced
+- Predecessors:
+  - local `.markdownlint.json`
+  - local `.markdownlint.jsonc`
+  - local `.markdownlint-cli2.jsonc`
+  - local `.markdownlintignore`
+- Config files:
+  - `.markdownlint-cli2.jsonc`
+  - `.markdownlintignore`
+  - package scripts that invoke `markdownlint-cli2`
+- Integrations:
+  - markdownlint-cli2
+  - package scripts
+  - lint-staged
+  - pre-commit hooks
+  - CI
+- Authoritative documentation:
+  - repository `README.md`
+  - package changelog
+  - migration documents
+  - installed package `README.md`
+  - installed package `.markdownlint-cli2.jsonc`
+  - installed package `.markdownlintignore`
+- Audit checks:
+  - confirm the shared config is extended or invoked
+  - inspect local rule overrides and ignore patterns
+  - check custom rules bundled by the package
+  - identify duplicated inherited rules
+- Migration rules:
+  - preserve repository-specific ignores and prose rules
+  - migrate local markdownlint settings only after comparing behaviour
+  - do not auto-fix Markdown unless explicitly requested
+- Validation:
+  - `npx markdownlint-cli2 --config .markdownlint-cli2.jsonc "**/*.md"`
+- Coexistence:
+  - may coexist with prose linters and documentation generators
+  - may coexist with local markdownlint overrides that are still necessary
+
+## `@dnbhq/biome-config`
+
+- Repository: `https://github.com/dnbhq/biome-config`
+- npm package: `@dnbhq/biome-config`
+- Weight: `30`
+- Package resource: `resources/packages/biome.md`
+- Removable packages:
+  - ESLint and Prettier packages only when Biome replacement coverage is confirmed and repository references are gone
+- Predecessors:
+  - local Biome configuration copied from DNBHQ defaults
+  - local ESLint or Prettier configuration replaced by Biome coverage
+- Config files:
+  - `biome.json`
+  - `biome.jsonc`
+  - package scripts that invoke `biome`
+- Integrations:
+  - `@biomejs/biome`
+  - package scripts
+  - lint-staged
+  - pre-commit hooks
+  - CI
+  - editor settings
+- Authoritative documentation:
+  - repository `README.md`
+  - package changelog
+  - migration documents
+  - installed package `README.md`
+  - installed package `config.json`
+  - installed package `package.json` exports
+- Audit checks:
+  - confirm the shared config path resolves
+  - confirm installed Biome satisfies the package peer dependency
+  - inspect formatter, linter, assist, files, and ignore overrides
+  - check for duplicated inherited settings
+  - identify ESLint and Prettier responsibilities that remain outside Biome
+- Migration rules:
+  - install Biome directly in the consuming repository
+  - preserve project-specific Biome overrides
+  - do not remove ESLint or Prettier until replacement coverage is confirmed
+  - avoid write-mode checks unless explicitly requested
+- Validation:
+  - `npx biome check`
+- Coexistence:
+  - may coexist with ESLint, Prettier, or framework tooling when those tools still have responsibilities
+
+## `@dnbhq/sharp-lint-staged`
+
+- Repository: `https://github.com/dnbhq/sharp-lint-staged`
+- npm package: `@dnbhq/sharp-lint-staged`
+- Package resource: `resources/packages/other.md`
+- Removable packages:
+  - local image optimisation wrappers and duplicate image tooling only when output and file coverage are equivalent
+- Predecessors:
+  - local image optimization lint-staged commands
+  - local `sharp` or `svgo` wrapper scripts
+- Config files:
+  - `package.json` `lint-staged` field
+  - `.lintstagedrc`
+  - `.lintstagedrc.json`
+  - `.lintstagedrc.js`
+  - `.lintstagedrc.cjs`
+  - `lint-staged.config.js`
+  - package-specific cosmiconfig files documented by the package
+- Integrations:
+  - lint-staged
+  - Git pre-commit hooks
+  - image asset workflows
+  - `sharp`
+  - `svgo`
+- Authoritative documentation:
+  - repository `README.md`
+  - package changelog
+  - migration documents
+  - installed package `README.md`
+  - installed package CLI help
+- Audit checks:
+  - inspect image globs covered by lint-staged
+  - confirm the CLI binary resolves
+  - check local image optimization options
+  - identify duplicate `sharp`, `svgo`, or custom optimizer commands
+- Migration rules:
+  - preserve project-specific image quality, format, and exclusion settings
+  - do not rewrite existing image assets outside an explicitly requested optimization run
+  - replace custom scripts only after confirming equivalent output and file coverage
+- Validation:
+  - `npx sharp-lint-staged --help`
+- Coexistence:
+  - may coexist with build-time image pipelines
+  - may coexist with repository-specific image tooling for formats or targets not covered by the package
+
+## `@dnbhq/lintstaged-config`
+
+- Repository: `https://github.com/dnbhq/lintstaged-config`
+- npm package: `@dnbhq/lintstaged-config`
+- Weight: `20`
+- Package resource: `resources/packages/other.md`
+- Removable packages:
+  - none until package metadata and exported config paths are verified
+- Predecessors:
+  - local lint-staged configuration
+  - package-specific lint-staged snippets duplicated across repositories
+- Config files:
+  - `package.json` `lint-staged` field
+  - `.lintstagedrc`
+  - `.lintstagedrc.json`
+  - `.lintstagedrc.js`
+  - `.lintstagedrc.cjs`
+  - `lint-staged.config.js`
+  - `lint-staged.config.cjs`
+  - `lint-staged.config.mjs`
+- Integrations:
+  - lint-staged
+  - simple-git-hooks
+  - husky
+  - pre-commit hooks
+  - package scripts
+- Authoritative documentation:
+  - repository `README.md` when available
+  - package changelog when available
+  - migration documents when available
+  - installed package `README.md` when available
+  - installed package `package.json` exports when available
+- Audit checks:
+  - confirm whether the package is published and installed
+  - confirm exported config paths before recommending migration
+  - inspect local lint-staged globs and command ordering
+  - identify package-specific lint-staged presets already supplied by other DNBHQ packages
+- Migration rules:
+  - do not migrate to this package until repository and package metadata are available
+  - preserve repository-specific staged-file commands
+  - avoid merging unrelated lint-staged responsibilities without explicit selection
+- Validation:
+  - `npx lint-staged --debug`
+- Coexistence:
+  - may coexist with package-specific lint-staged commands from `@dnbhq/biome-config`, `@dnbhq/markdownlint-config`, or `@dnbhq/sharp-lint-staged`
+
+## `@dnbhq/tsconfig`
+
+- Repository: `https://github.com/dnbhq/tsconfig`
+- npm package: `@dnbhq/tsconfig`
+- Weight: `20`
+- Package resource: `resources/packages/typescript.md`
+- Removable packages:
+  - older TypeScript shared config packages only when local `extends`, scripts, and build tooling no longer reference them
+- Predecessors:
+  - local shared `tsconfig` bases copied across repositories
+  - older `@davidsneighbour` TypeScript configuration packages if present
+- Config files:
+  - `tsconfig.json`
+  - `tsconfig.*.json`
+  - package scripts that invoke `tsc`
+- Integrations:
+  - TypeScript
+  - Node.js CLI builds
+  - Astro projects
+  - editor TypeScript services
+  - build and typecheck scripts
+- Authoritative documentation:
+  - repository `README.md`
+  - package changelog
+  - migration documents
+  - installed package `README.md`
+  - installed package `strict.json`
+  - installed package `cli.json`
+  - installed package `astro.json`
+- Audit checks:
+  - confirm `extends` uses one of the exported configs
+  - confirm compatible `typescript` and optional `@types/node` versions
+  - inspect local `include`, `exclude`, `files`, `references`, and path aliases
+  - check framework-specific config requirements
+  - inspect typecheck, build, and editor integrations
+- Migration rules:
+  - preserve project-local `include`, `exclude`, `files`, `references`, paths, and framework requirements
+  - do not copy inherited compiler options into the consuming repository
+  - do not change module system, emit behaviour, or strictness without documentation evidence
+  - use `@dnbhq/tsconfig/astro` only when Astro config paths resolve in the consuming project
+- Validation:
+  - `npx tsc --showConfig`
+  - `npx tsc --noEmit`
+- Coexistence:
+  - may coexist with framework-generated TypeScript config files
+  - may coexist with package-level configs in monorepos when inheritance remains clear
+
+## `@dnbhq/secretlint-config`
+
+- Repository: `https://github.com/dnbhq/secretlint-config`
+- npm package: `@dnbhq/secretlint-config`
+- Package resource: `resources/packages/other.md`
+- Removable packages:
+  - local secretlint rule sets or ad hoc secret-scanning configuration only when the shared package provides equivalent coverage
+- Predecessors:
+  - local `.secretlintrc.json` rule configuration
+  - other secret-scanning tools not based on `secretlint`
+- Config files:
+  - `.secretlintrc.json`
+  - `.secretlintrc.js`
+  - `.secretlintrc.cjs`
+  - `.secretlintignore`
+  - package scripts that invoke `secretlint`
+- Integrations:
+  - `secretlint`
+  - lint-staged
+  - pre-commit hooks
+  - CI
+- Authoritative documentation:
+  - repository `README.md`
+  - package changelog
+  - migration documents
+  - installed package `README.md`
+  - installed package `package.json` exports
+- Audit checks:
+  - confirm the shared config is extended by `.secretlintrc.json` (or equivalent)
+  - confirm installed `secretlint` satisfies the package peer dependency
+  - inspect local rule overrides and ignore patterns
+  - check for duplicated inherited rules
+- Migration rules:
+  - preserve repository-specific ignore patterns and rule overrides
+  - migrate local secretlint rule sets only after comparing rule coverage
+  - do not weaken or disable secret-detection rules without explicit user approval
+- Validation:
+  - `npx secretlint "**/*"`
+- Coexistence:
+  - may coexist with other secret-scanning tools when responsibilities are intentionally separated
+
+The following template is retained for future package entries.
+
+## Package entry template
+
+### `PACKAGE_NAME`
+
+- Repository: `https://github.com/dnbhq/REPOSITORY`
+- npm package: `PACKAGE_NAME`
+- Weight: `OPTIONAL_NUMBER`
+- Package resource: `resources/packages/PACKAGE_RESOURCE.md`
+- Removable packages:
+  - `OPTIONAL_REMOVABLE_PACKAGE`
+- Predecessors:
+  - `LEGACY_PACKAGE`
+- Config files:
+  - `CONFIG_FILE`
+- Integrations:
+  - package scripts
+  - CI
+  - editor settings
+- Authoritative documentation:
+  - repository `README.md`
+  - package changelog
+  - migration documents
+  - installed package `README.md`
+- Audit checks:
+  - describe package-specific checks
+- Migration rules:
+  - describe supported predecessor migrations
+- Validation:
+  - `VALIDATION_COMMAND`
+- Coexistence:
+  - describe tools or packages that may remain alongside it

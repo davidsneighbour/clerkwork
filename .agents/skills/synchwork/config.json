@@ -1,5 +1,6 @@
 {
   "repositories": [
+    "~/github.com/davidsneighbour/apparatus",
     "~/github.com/davidsneighbour/clerkwork",
     "~/github.com/davidsneighbour/gallimaufry",
     "~/github.com/davidsneighbour/gazetteer",
@@ -8,6 +9,7 @@
     "~/github.com/davidsneighbour/posthaste"
   ],
   "scripts": [
+    ["apparatus", ["clerkwork", "posthaste", "apparatus"]],
     ["clerkwork", ["patternbook", "posthaste", "clerkwork"]],
     ["gallimaufry", ["clerkwork", "posthaste", "gallimaufry"]],
     ["gazetteer", ["clerkwork", "posthaste", "gazetteer"]],

@@ -1,0 +1,4 @@
+interface:
+  display_name: "DNB Behaviour Spec"
+  short_description: "Review specs and generate traceable tests."
+  default_prompt: "Use $dnb-behaviour-spec to review or generate tests from a Behaviour.spec.md file."

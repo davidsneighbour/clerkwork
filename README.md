@@ -65,6 +65,7 @@ Skill names are intentionally flat. Categories organise the collection without b
 
 | Exhibit | Skill |
 | :---: | :--- |
+| [![Apparatus](.github/assets/images/skillwerk/apparatus-thumb.png)](https://github.com/davidsneighbour/apparatus) | **[Apparatus](https://github.com/davidsneighbour/apparatus):** A collection of practical, tool-driven skills for operating browsers, diagnostics, media utilities, and other reusable technical machinery. |
 | [![Clerkwork](.github/assets/images/skillwerk/thumb.png)](https://github.com/davidsneighbour/clerkwork) | **[Clerkwork](https://github.com/davidsneighbour/clerkwork):** It's an engineers world. Start your engines, maintain, contrive, and put in the works. |
 | [![Gallimaufry](.github/assets/images/skillwerk/gallimaufry-thumb.png)](https://github.com/davidsneighbour/gallimaufry) | **[Gallimaufry](https://github.com/davidsneighbour/gallimaufry):** A miscellaneous collection of small AI skills and odd useful workflows. |
 | [![Gazetteer](.github/assets/images/skillwerk/gazetteer-thumb.png)](https://github.com/davidsneighbour/gazetteer) | **[Gazetteer](https://github.com/davidsneighbour/gazetteer):** Place-aware patterns for geographic content, local context, and location-rich publishing. |
