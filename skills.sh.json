@@ -37,9 +37,10 @@
     },
     {
       "title": "Git and GitHub",
-      "description": "Skills for GitHub issue classification, selection, and implementation workflows.",
+      "description": "Skills for commit messages, GitHub issue classification, selection, and implementation workflows.",
       "skills": [
-        "github-label-classifier",
+        "commit",
+        "labels",
         "select-next-issue",
         "work-on-issue",
         "work-on-next-issue",

@@ -37,7 +37,8 @@ skill directory, commonly in `references/`, `scripts/`, or `agents/`.
 
 ### Git and GitHub
 
-* `github-label-classifier`
+* `commit`
+* `labels`
 * `select-next-issue`
 * `work-on-issue`
 * `work-on-next-issue`

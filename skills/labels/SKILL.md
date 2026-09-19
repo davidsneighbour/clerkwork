@@ -1,12 +1,14 @@
 ---
-id: github-label-classifier
-name: github-label-classifier
-title: Clerkwork GitHub Label Classifier
+id: labels
+name: labels
+title: Clerkwork Issue Label Classifier
 type: skill
-description: Analyse GitHub issue text or issue metadata and select or apply labels from Patrick's category:value label taxonomy. Use when creating, triaging, reviewing, updating, or closing GitHub issues, or when validating whether an issue's existing labels correctly represent its type, workflow status, resolution, priority, and metadata.
+description: Analyse issue text or issue metadata and select or apply labels from Patrick's category:value label taxonomy. Use when creating, triaging, reviewing, updating, or closing issues, or when validating whether an issue's existing labels correctly represent its type, workflow status, resolution, priority, and metadata.
 ---
 
-Classify GitHub issues using the canonical label taxonomy in `references/label-taxonomy.yml`.
+Classify issues using the canonical label taxonomy in `references/label-taxonomy.yml`.
+
+This skill's implementation — tooling, examples, and scripts — targets GitHub, since that is the git host used almost universally in Patrick's own work. The classification model itself (category:value taxonomy, lifecycle invariants) is host-agnostic; extend `scripts/label-manager.sh` and the applying-changes steps below to another git provider's label API if one is ever needed.
 
 ## Core model
 

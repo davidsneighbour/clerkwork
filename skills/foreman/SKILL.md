@@ -35,7 +35,8 @@ If the user supplies a broad category or topic without a concrete action, show o
 
 ### Git and GitHub
 
-* `github-label-classifier` — classify GitHub issues with the repository label taxonomy.
+* `commit` — write a Git commit message that follows the Conventional Commits specification.
+* `labels` — classify issues with the repository label taxonomy.
 * `select-next-issue` — select one suitable open issue without implementing it.
 * `work-on-issue` — implement one explicitly selected GitHub issue.
 * `work-on-next-issue` — select and implement the next suitable issue.
@@ -61,8 +62,9 @@ If the user supplies a broad category or topic without a concrete action, show o
 * `foreman issues select` → `select-next-issue`
 * `foreman issues next` → `work-on-next-issue`
 * `foreman issues all` → `work-through-issues`
-* `foreman issues labels` → `github-label-classifier`
+* `foreman issues labels` → `labels`
 * `foreman issues sync` → `project-task-triage`
+* `foreman commit` → `commit`
 * a specific issue number, such as `foreman issues 123` → `work-on-issue`
 
 ## Rules

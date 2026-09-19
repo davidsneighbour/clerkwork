@@ -1,0 +1,4 @@
+interface:
+  display_name: "Clerkwork issue label classifier"
+  short_description: "Classify issues with labels"
+  default_prompt: "Use $labels to classify issues with the repository label taxonomy."

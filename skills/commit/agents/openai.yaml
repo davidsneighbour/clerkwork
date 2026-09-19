@@ -1,0 +1,4 @@
+interface:
+  display_name: "Clerkwork commit"
+  short_description: "Write Conventional Commits messages"
+  default_prompt: "Use $commit to write a Git commit message that follows the Conventional Commits specification."
