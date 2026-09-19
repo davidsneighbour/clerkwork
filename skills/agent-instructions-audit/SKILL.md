@@ -3,7 +3,7 @@ id: agent-instructions-audit
 name: agent-instructions-audit
 title: Clerkwork agent instructions audit
 type: skill
-description: Audit repository agent instructions for bootstrap cost, scope quality, duplication, and correct separation between AGENTS.md, scoped instructions, task references, skills, and documentation. Audit is non-mutating by default; optimise only when explicitly requested.
+description: Audit repository agent instructions for bootstrap cost, scope quality, duplication, legacy CLAUDE.md content, and correct separation between AGENTS.md, scoped instructions, task references, skills, and documentation. Audit is non-mutating by default; optimise only when explicitly requested.
 argument-hint: "<audit|optimise> [target]"
 ---
 
@@ -13,13 +13,11 @@ The primary goal is not merely shorter prose. The goal is to minimise unconditio
 
 ## Relationship with agent alignment
 
-`AGENTS.md` is the canonical agent-independent entry point.
+`AGENTS.md` is the canonical repository instruction entry point for the supported current Claude Code and Codex setup.
 
-`agent-align` owns structural alignment of `AGENTS.md`, agent-specific compatibility adapters such as `CLAUDE.md`, and the expected instruction/reference directory structure.
+`agent-align` owns structural alignment of `AGENTS.md`, `.agents/instructions/`, and `.agents/references/`.
 
-This skill owns context-efficiency analysis and optimisation after or alongside that alignment.
-
-If the repository is missing `AGENTS.md`, uses duplicated agent-specific instruction corpora, or otherwise needs canonical entry-point repair, report that condition and use `agent-align` for the structural repair. Do not duplicate its compatibility-adapter logic here.
+This skill owns context-efficiency analysis, duplication removal, and migration of obsolete agent-specific repository instruction files such as `CLAUDE.md`.
 
 ## Modes
 
@@ -29,26 +27,37 @@ Audit is the default and MUST NOT modify repository files.
 
 Inspect the instruction architecture, classify material, estimate context cost, and report concrete recommendations.
 
+If `CLAUDE.md` exists, read it completely and report:
+
+* whether it contains only obsolete adapter/import boilerplate;
+* which content duplicates `AGENTS.md` or another instruction source;
+* which unique content remains useful;
+* where each useful unique instruction should move;
+* whether the file can be removed after migration.
+
+Treat a project `CLAUDE.md` as an `ERROR` in the target architecture because current Claude Code's default AGENTS.md support is used when no project CLAUDE.md is present.
+
 ### Optimise
 
-Optimise mode may modify agent instruction files only when the user explicitly asks to optimise, restructure, fix, or apply the audit recommendations.
-
-Before editing, preserve the behavioural intent of existing instructions. Do not silently discard meaningful rules.
+Optimise mode may modify agent instruction files only when the user explicitly asks to optimise, restructure, fix, migrate, or apply the audit recommendations.
 
 Optimisation may edit:
 
 * `AGENTS.md`;
+* `CLAUDE.md` when present;
 * files below `.agents/instructions/`;
 * files below `.agents/references/`;
 * narrow pointers in ordinary documentation when required to keep moved material discoverable.
 
-Do not edit agent-specific compatibility adapters such as `CLAUDE.md` unless the task is explicitly handed to `agent-align`.
+Optimisation may delete `CLAUDE.md` only after all useful unique content has been preserved elsewhere in the canonical hierarchy.
+
+Do not keep a minimal `CLAUDE.md` adapter for the supported current-Claude setup.
 
 ## Target architecture
 
 Use three instruction layers.
 
-### Bootstrap: `AGENTS.md`
+### Bootstrap: AGENTS.md
 
 `AGENTS.md` is unconditional context and therefore the most expensive layer.
 
@@ -59,13 +68,11 @@ Keep it as small as practical. It should contain only:
 * the minimal explanation needed to discover scoped instructions and task references;
 * narrow semantic triggers that cannot live in a more specific scoped instruction.
 
-Do not keep architecture manuals, command catalogues, framework documentation, API notes, deployment internals, or specialised procedures in bootstrap context merely because they may occasionally be useful.
-
-### Scoped instructions: `.agents/instructions/`
+### Scoped instructions: .agents/instructions/
 
 Scoped instruction files contain behavioural rules that apply automatically because the files being worked on match their scope.
 
-Every instruction file MUST have an `applyTo` pattern that is narrower than the entire repository.
+Every instruction file MUST have an `applyTo` pattern narrower than the entire repository.
 
 The following and equivalent repository-wide scopes are prohibited:
 
@@ -77,83 +84,93 @@ applyTo: "**/*"
 
 Also flag effectively-global scopes that technically avoid those exact forms but cover most working files.
 
-Use the narrowest practical `applyTo` pattern. A rule for Astro components should not match all TypeScript, Markdown, and CSS merely because those files can be related to components.
-
-### Task references: `.agents/references/`
+### Task references: .agents/references/
 
 Reference files contain specialised knowledge or procedures whose applicability depends on the semantic task rather than simply the path of the file being edited.
 
 Reference files MUST NOT have `applyTo`.
 
-Examples include:
-
-* Tinykeys or another library's usage conventions;
-* keyboard-shortcut implementation guidance;
-* deployment internals;
-* image-pipeline architecture;
-* external API usage notes;
-* specialised maintenance procedures.
-
 A reference MUST have a discoverable task trigger. Prefer placing that trigger in the narrowest relevant scoped instruction. Put it in `AGENTS.md` only when no narrower instruction can reliably expose it.
 
-Example:
+## CLAUDE.md migration
 
-```markdown
-When modifying keyboard shortcuts or key bindings, read `.agents/references/development/tinykeys.md`.
-```
+For the supported latest-Claude setup, `CLAUDE.md` is legacy repository state.
+
+When it exists:
+
+1. Read `CLAUDE.md` and `AGENTS.md` completely before making any migration decision.
+2. Classify every meaningful `CLAUDE.md` instruction as:
+   * duplicate;
+   * obsolete compatibility boilerplate;
+   * universal bootstrap;
+   * file-scoped behavioural rule;
+   * task-triggered reference material;
+   * reusable skill/workflow;
+   * ordinary documentation.
+3. Remove duplicate and obsolete adapter/import boilerplate.
+4. Move useful universal instructions into `AGENTS.md`.
+5. Move file-scoped behavioural rules into `.agents/instructions/` with precise non-global `applyTo`.
+6. Move semantic task knowledge into `.agents/references/` without `applyTo`.
+7. Move reusable multi-step workflows to skills where appropriate.
+8. Preserve genuinely useful Claude-originated guidance as ordinary canonical instructions rather than keeping a Claude-specific repository file.
+9. Verify that all unique useful content now exists elsewhere.
+10. Delete `CLAUDE.md`.
+
+Never delete `CLAUDE.md` merely because it exists. Preserve intent first, then remove the obsolete file.
+
+Also flag project-level variants such as `.claude/CLAUDE.md` or `CLAUDE.local.md` when they contain repository instructions that would mask or compete with the canonical `AGENTS.md` setup.
 
 ## Classification
 
 Classify each substantial instruction block or file as one of:
 
-* `bootstrap`: a concise rule needed for essentially every task;
+* `bootstrap`: concise rule needed for essentially every task;
 * `scope`: behavioural instruction whose applicability follows from file path or type;
 * `task`: semantic trigger for specialised task knowledge;
 * `reference`: specialised knowledge or procedure loaded only when required;
 * `skill`: reusable multi-step workflow better implemented as a skill;
 * `duplicate`: behaviour already defined elsewhere;
-* `obsolete`: instruction no longer supported by the repository.
+* `obsolete`: instruction or compatibility mechanism no longer needed.
 
-Ordinary project documentation is not an agent-instruction classification. If material is explanatory background rather than agent behaviour or task-specific operational knowledge, recommend moving it to normal repository documentation.
+Ordinary project documentation is not an agent-instruction classification.
 
 ## Audit procedure
 
 1. Read `AGENTS.md` completely.
-2. Inspect known agent-specific adapters only enough to determine whether they are thin adapters or duplicated instruction corpora. Delegate structural repair to `agent-align`.
-3. Inventory `.agents/instructions/` and `.agents/references/` when present.
-4. Parse each instruction file's `applyTo` frontmatter.
-5. Identify global, missing, malformed, redundant, overlapping, and suspiciously broad scopes.
-6. Identify reference files with `applyTo`; this is invalid.
-7. Identify scoped instructions that primarily contain documentation or specialised reference material.
-8. Identify bootstrap sections that are conditional, procedural, duplicated, or primarily documentation.
-9. Trace reference triggers and report orphaned references or triggers that unnecessarily live in `AGENTS.md`.
-10. Check for duplicated or contradictory rules across the instruction hierarchy.
-11. Estimate unconditional context cost and representative task-specific context cost.
-12. Recommend moves, scope changes, deletions, or consolidation without changing files in audit mode.
+2. Check for `CLAUDE.md`, `.claude/CLAUDE.md`, and `CLAUDE.local.md`.
+3. If any exist, read them completely and classify their contents using the migration rules above.
+4. Inventory `.agents/instructions/` and `.agents/references/` when present.
+5. Parse each instruction file's `applyTo` frontmatter.
+6. Identify global, missing, malformed, redundant, overlapping, and suspiciously broad scopes.
+7. Identify reference files with `applyTo`; this is invalid.
+8. Identify scoped instructions that primarily contain documentation or specialised reference material.
+9. Identify bootstrap sections that are conditional, procedural, duplicated, or primarily documentation.
+10. Trace reference triggers and report orphaned references or triggers that unnecessarily live in `AGENTS.md`.
+11. Check for duplicated or contradictory rules across the instruction hierarchy.
+12. Estimate unconditional context cost and representative task-specific context cost.
+13. Recommend moves, scope changes, deletions, or consolidation without changing files in audit mode.
 
 ## Context-cost estimates
 
 Report byte counts when available and provide approximate token counts.
 
-Token estimates are estimates, not billing measurements. Prefer a clearly stated approximation such as bytes divided by four when no tokenizer is available.
+Token estimates are estimates, not billing measurements. Prefer bytes divided by four when no tokenizer is available.
 
 At minimum report:
 
 * `AGENTS.md` size and estimated tokens;
+* any legacy project instruction file size, including `CLAUDE.md`;
 * other effectively unconditional instruction material;
 * total scoped instruction size;
 * total reference size;
 * estimated bootstrap cost before optimisation;
-* estimated bootstrap cost after the proposed optimisation;
-* one or more representative task scenarios when useful.
-
-Do not claim that a reference is free after it is loaded. The optimisation target is to keep irrelevant material out of context until needed.
+* estimated bootstrap cost after the proposed optimisation.
 
 ## Findings and severity
 
 Use:
 
-* `ERROR` for invalid architecture, including repository-wide `applyTo`, `applyTo` on references, or contradictory mandatory rules;
+* `ERROR` for invalid architecture, including a legacy project `CLAUDE.md` in the supported current-Claude setup, repository-wide `applyTo`, `applyTo` on references, or contradictory mandatory rules;
 * `WARN` for effectively-global scopes, major duplication, misplaced large material, missing task triggers, or substantial bootstrap bloat;
 * `INFO` for smaller opportunities and maintainability improvements.
 
@@ -164,15 +181,17 @@ For every finding, include the affected file or section, classification, reason,
 When optimising:
 
 1. Preserve behaviour before reducing wording.
-2. Move universal concise rules to `AGENTS.md`.
-3. Move automatically file-scoped behaviour to `.agents/instructions/` with precise `applyTo`.
-4. Move semantically triggered specialised knowledge to `.agents/references/` without `applyTo`.
-5. Move reusable multi-step workflows to skills when appropriate.
-6. Move explanatory background to ordinary documentation.
-7. Remove duplicate wording only after confirming the authoritative copy remains discoverable.
-8. Prefer a scoped instruction as the trigger for a related reference instead of adding every reference to `AGENTS.md`.
-9. Do not create a global instruction file as a workaround for keeping `AGENTS.md` small.
-10. Re-run the audit after changes and compare before/after bootstrap estimates.
+2. Migrate useful `CLAUDE.md` content before deleting the file.
+3. Move universal concise rules to `AGENTS.md`.
+4. Move automatically file-scoped behaviour to `.agents/instructions/` with precise `applyTo`.
+5. Move semantically triggered specialised knowledge to `.agents/references/` without `applyTo`.
+6. Move reusable multi-step workflows to skills when appropriate.
+7. Move explanatory background to ordinary documentation.
+8. Remove duplicate wording only after confirming the authoritative copy remains discoverable.
+9. Prefer a scoped instruction as the trigger for a related reference instead of adding every reference to `AGENTS.md`.
+10. Do not create a global instruction file as a workaround for keeping `AGENTS.md` small.
+11. Remove `CLAUDE.md` once migration is complete.
+12. Re-run the audit after changes and compare before/after bootstrap estimates.
 
 ## Expected audit report
 
@@ -182,28 +201,10 @@ Use a compact report with:
 2. context-cost summary;
 3. errors;
 4. warnings;
-5. classification/move recommendations;
-6. estimated post-optimisation bootstrap size;
-7. any structural alignment work that should be delegated to `agent-align`.
-
-Prefer actionable findings over generic prose.
-
-A useful context summary resembles:
-
-```text
-Bootstrap
-  AGENTS.md                     ~1,900 tokens
-  effectively unconditional      ~600 tokens
-
-Conditional
-  scoped instructions total    ~4,200 tokens
-  references total             ~8,600 tokens
-
-Representative task
-  Astro component              ~3,100 tokens
-
-Target bootstrap              ~1,400 tokens
-```
+5. CLAUDE.md migration status when applicable;
+6. classification/move recommendations;
+7. estimated post-optimisation bootstrap size;
+8. any structural alignment work that should be delegated to `agent-align`.
 
 ## Validation
 
@@ -212,6 +213,8 @@ In audit mode, validate conclusions against the actual repository files and do n
 In optimise mode, verify that:
 
 * `AGENTS.md` remains the canonical entry point;
+* no project `CLAUDE.md` remains after successful migration;
+* no useful unique `CLAUDE.md` content was lost;
 * universal behaviour has not been lost;
 * every instruction has a non-global `applyTo`;
 * no instruction scope is `*`, `**`, `**/*`, or equivalent;
