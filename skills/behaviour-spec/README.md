@@ -1,6 +1,6 @@
-# DNB behaviour spec
+# Behaviour spec
 
-`dnb-behaviour-spec` is a reusable AI coding-agent skill for working with `Behaviour.spec.md` files.
+`behaviour-spec` is a reusable AI coding-agent skill for working with `Behaviour.spec.md` files.
 
 It defines a strict, specification-first workflow for describing expected behaviour, reviewing that behaviour for clarity and testability, generating or updating tests from the specification, and validating the result with the repository's existing tooling.
 
@@ -41,7 +41,7 @@ The workflow is intentionally high-friction. A weak specification should fail be
 ## Directory layout
 
 ```text
-dnb-behaviour-spec/
+behaviour-spec/
 ├── SKILL.md
 ├── README.md
 ├── examples/
@@ -259,7 +259,7 @@ Do not include full file contents unless the user explicitly requests them.
 Copy the directory into your skills folder:
 
 ```text
-skills/30-quality-and-verification/dnb-behaviour-spec/
+skills/30-quality-and-verification/behaviour-spec/
 ```
 
 The directory must include `SKILL.md`.
@@ -285,7 +285,7 @@ Then fill out all required sections.
 Example prompt:
 
 ```text
-Use the dnb-behaviour-spec skill to review src/components/Header/Behaviour.spec.md. Do not generate tests yet.
+Use the behaviour-spec skill to review src/components/Header/Behaviour.spec.md. Do not generate tests yet.
 ```
 
 The agent should use:
@@ -317,7 +317,7 @@ Common blocking issues are:
 Example prompt:
 
 ```text
-Use the dnb-behaviour-spec skill to generate or update tests from src/components/Header/Behaviour.spec.md. Use the repository's existing test tools only.
+Use the behaviour-spec skill to generate or update tests from src/components/Header/Behaviour.spec.md. Use the repository's existing test tools only.
 ```
 
 The agent should use:

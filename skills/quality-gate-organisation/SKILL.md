@@ -1,7 +1,7 @@
 ---
-id: dnb-quality-gate-organisation
-name: dnb-quality-gate-organisation
-title: DNB Quality Gate Organisation
+id: quality-gate-organisation
+name: quality-gate-organisation
+title: Quality Gate Organisation
 description: Name repository quality-check commands consistently. Use when deciding npm script names or documenting check, lint, validate, format, test, and audit command conventions.
 ---
 
