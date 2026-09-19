@@ -1,0 +1,4 @@
+interface:
+  display_name: "Clerkwork Node version policy"
+  short_description: "Align Node and npm version policy"
+  default_prompt: "Use $manage-node-version-policy to audit and align Node.js and npm version declarations."

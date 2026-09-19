@@ -1,4 +1,0 @@
-interface:
-  display_name: "Clerkwork OSV scan"
-  short_description: "Scan dependency vulnerabilities"
-  default_prompt: "Use $clerkwork-osv-scan to scan dependency vulnerabilities, apply safe fixes, and file follow-up issues."

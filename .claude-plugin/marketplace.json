@@ -14,19 +14,19 @@
       "strict": false,
       "skills": [
         "./skills/foreman",
-        "./skills/clerkwork-agent-align",
-        "./skills/clerkwork-agent-instructions-audit",
-        "./skills/clerkwork-dependency-maintenance",
-        "./skills/clerkwork-github-label-classifier",
-        "./skills/clerkwork-manage-node-version-policy",
-        "./skills/clerkwork-osv-scan",
-        "./skills/clerkwork-project-state-report",
-        "./skills/clerkwork-project-task-triage",
-        "./skills/clerkwork-resume-interrupted-work",
-        "./skills/clerkwork-select-next-issue",
-        "./skills/clerkwork-work-on-issue",
-        "./skills/clerkwork-work-on-next-issue",
-        "./skills/clerkwork-work-through-issues"
+        "./skills/agent-align",
+        "./skills/agent-instructions-audit",
+        "./skills/dependency-maintenance",
+        "./skills/github-label-classifier",
+        "./skills/manage-node-version-policy",
+        "./skills/osv-scan",
+        "./skills/project-state-report",
+        "./skills/project-task-triage",
+        "./skills/resume-interrupted-work",
+        "./skills/select-next-issue",
+        "./skills/work-on-issue",
+        "./skills/work-on-next-issue",
+        "./skills/work-through-issues"
       ]
     }
   ]

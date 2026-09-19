@@ -1,4 +1,0 @@
-interface:
-  display_name: "Clerkwork agent instructions audit"
-  short_description: "Audit and optimise agent instruction context"
-  default_prompt: "Use $clerkwork-agent-instructions-audit to audit this repository's agent instruction architecture and context cost."

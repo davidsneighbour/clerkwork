@@ -1,4 +1,0 @@
-interface:
-  display_name: "Clerkwork work through issues"
-  short_description: "Work through open GitHub issues"
-  default_prompt: "Use $clerkwork-work-through-issues to repeatedly select, implement, validate, and commit open issues."

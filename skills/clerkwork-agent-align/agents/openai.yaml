@@ -1,4 +1,0 @@
-interface:
-  display_name: "Clerkwork agent alignment"
-  short_description: "Align repository agent instruction files"
-  default_prompt: "Use $clerkwork-agent-align to onboard Clerkwork agent instructions after confirming with me."

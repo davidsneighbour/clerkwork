@@ -16,33 +16,34 @@ skill directory, commonly in `references/`, `scripts/`, or `agents/`.
 
 ## Skill Map
 
-* `foreman`: single router skill. Interprets short command-style requests
-  (`foreman audit packages`, `foreman issues next`) or plain-language
-  requests, asks a clarifying question when the area or action is missing,
-  and hands off to the matching skill below without doing the work itself.
-* `clerkwork-dependency-maintenance`: safely maintain npm dependencies in a
-  single-package repository or npm monorepo.
-* `clerkwork-github-label-classifier`: analyse GitHub issue text and select or
-  apply labels from Patrick's category:value label taxonomy.
-* `clerkwork-manage-node-version-policy`: audit and update Node.js and npm version
-  declarations across a repository against actively supported releases.
-* `clerkwork-osv-scan`: scan dependencies for known vulnerabilities with
-  osv-scanner, auto-apply safe fixes, and file issues for the rest.
-* `clerkwork-project-state-report`: report what changed in a repository since a
-  given time, including GitHub PR and issue activity.
-* `clerkwork-project-task-triage`: sync the local TODO.md scratch pad with GitHub
-  Issues and regenerate the local PROJECT.md dashboard.
-* `clerkwork-resume-interrupted-work`: manage a project-root RESUME.md handoff file
-  that blocks new work until previously interrupted work is resolved.
-* `clerkwork-select-next-issue`: select one suitable open GitHub issue by priority
-  and roadmap relevance, without implementing it.
-* `clerkwork-work-on-issue`: inspect a specific GitHub issue, implement the
-  required change, validate, and commit with a closing reference.
-* `clerkwork-work-on-next-issue`: orchestrate selecting and implementing the next
-  suitable open GitHub issue.
-* `clerkwork-work-through-issues`: continuously work through open GitHub issues
-  until no suitable actionable issues remain, committing each fix
-  individually.
+`foreman` is the single interface to the Clerkwork collection. `foreman overview` lists all available skills grouped by category, and topic-oriented requests such as `foreman git`, `foreman project`, or `foreman audit packages` route to the relevant skill.
+
+### Agent management
+
+* `agent-align`
+* `agent-instructions-audit`
+
+### Repository maintenance
+
+* `dependency-maintenance`
+* `manage-node-version-policy`
+* `osv-scan`
+
+### Project management
+
+* `project-state-report`
+* `project-task-triage`
+* `resume-interrupted-work`
+
+### Git and GitHub
+
+* `github-label-classifier`
+* `select-next-issue`
+* `work-on-issue`
+* `work-on-next-issue`
+* `work-through-issues`
+
+Keep public skill names flat. Categories are catalogue metadata and source-navigation concepts, not invocation namespaces.
 
 ## Build, Test, and Development Commands
 
@@ -69,8 +70,8 @@ npm run lint:spelling
 
 Use plain Markdown for skill documentation. Keep `SKILL.md` frontmatter
 specific and actionable, especially `id`, `name`, `title`, and `description`.
-Skill directories use lowercase hyphenated names such as
-`clerkwork-dependency-maintenance`; resource scripts use action-oriented names.
+Skill directories use lowercase hyphenated job names such as
+`dependency-maintenance`; do not prefix individual skills with `clerkwork-`. Resource scripts use action-oriented names.
 Prefer ASCII punctuation unless quoting existing text.
 
 ## Testing Guidelines

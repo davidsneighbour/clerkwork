@@ -1,4 +1,0 @@
-interface:
-  display_name: "Clerkwork work on issue"
-  short_description: "Implement one GitHub issue"
-  default_prompt: "Use $clerkwork-work-on-issue to inspect, implement, validate, and commit one specific GitHub issue."

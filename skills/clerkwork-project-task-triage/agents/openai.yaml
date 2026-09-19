@@ -1,4 +1,0 @@
-interface:
-  display_name: "Clerkwork project task triage"
-  short_description: "Sync TODO with GitHub Issues"
-  default_prompt: "Use $clerkwork-project-task-triage to sync TODO.md with GitHub Issues and refresh PROJECT.md."

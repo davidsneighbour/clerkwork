@@ -4,46 +4,46 @@
   "groupings": [
     {
       "title": "Router",
-      "description": "Single entry point that routes short commands to the right Clerkwork skill.",
+      "description": "Single interface to the Clerkwork collection and its skill catalogue.",
       "skills": [
         "foreman"
       ]
     },
     {
-      "title": "Agent Instructions",
+      "title": "Agent Management",
       "description": "Skills for aligning, auditing, and optimising repository agent instruction architecture.",
       "skills": [
-        "clerkwork-agent-align",
-        "clerkwork-agent-instructions-audit"
+        "agent-align",
+        "agent-instructions-audit"
       ]
     },
     {
       "title": "Repository Maintenance",
       "description": "Skills for keeping dependencies, Node versions, and vulnerabilities current.",
       "skills": [
-        "clerkwork-dependency-maintenance",
-        "clerkwork-manage-node-version-policy",
-        "clerkwork-osv-scan"
+        "dependency-maintenance",
+        "manage-node-version-policy",
+        "osv-scan"
       ]
     },
     {
-      "title": "Project Tracking",
-      "description": "Skills for reporting project state and triaging tracked work.",
+      "title": "Project Management",
+      "description": "Skills for reporting project state, tracking work, and resuming interrupted work.",
       "skills": [
-        "clerkwork-project-state-report",
-        "clerkwork-project-task-triage",
-        "clerkwork-resume-interrupted-work",
-        "clerkwork-github-label-classifier"
+        "project-state-report",
+        "project-task-triage",
+        "resume-interrupted-work"
       ]
     },
     {
-      "title": "Issue Workflow",
-      "description": "Skills for selecting and working through GitHub issues.",
+      "title": "Git and GitHub",
+      "description": "Skills for GitHub issue classification, selection, and implementation workflows.",
       "skills": [
-        "clerkwork-select-next-issue",
-        "clerkwork-work-on-issue",
-        "clerkwork-work-on-next-issue",
-        "clerkwork-work-through-issues"
+        "github-label-classifier",
+        "select-next-issue",
+        "work-on-issue",
+        "work-on-next-issue",
+        "work-through-issues"
       ]
     }
   ]
