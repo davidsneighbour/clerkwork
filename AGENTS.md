@@ -38,11 +38,8 @@ skill directory, commonly in `references/`, `scripts/`, or `agents/`.
 ### Git and GitHub
 
 * `commit`
+* `issues`
 * `labels`
-* `select-next-issue`
-* `work-on-issue`
-* `work-on-next-issue`
-* `work-through-issues`
 
 Keep public skill names flat. Categories are catalogue metadata and source-navigation concepts, not invocation namespaces.
 

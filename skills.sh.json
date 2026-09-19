@@ -37,14 +37,11 @@
     },
     {
       "title": "Git and GitHub",
-      "description": "Skills for commit messages, GitHub issue classification, selection, and implementation workflows.",
+      "description": "Skills for commits and Patrick's GitHub-first issue workflow.",
       "skills": [
         "commit",
-        "labels",
-        "select-next-issue",
-        "work-on-issue",
-        "work-on-next-issue",
-        "work-through-issues"
+        "issues",
+        "labels"
       ]
     }
   ]

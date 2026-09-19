@@ -56,11 +56,8 @@ Skill names are intentionally flat. Categories organise the collection without b
 ### Git and GitHub
 
 * `commit` writes Git commit messages that follow the Conventional Commits specification.
+* `issues` inspects, selects, and works through project issues using Patrick's GitHub-first workflow, while preserving the same principles on other issue systems where practical.
 * `labels` analyses issue text and selects or applies labels from Patrick's category:value label taxonomy.
-* `select-next-issue` selects one suitable open GitHub issue by priority and roadmap relevance, without implementing it.
-* `work-on-issue` inspects a specific GitHub issue, implements the required change, validates, and commits with a closing reference.
-* `work-on-next-issue` orchestrates selecting and implementing the next suitable open GitHub issue.
-* `work-through-issues` continuously works through open GitHub issues until no suitable actionable issues remain.
 
 ## The cabinet of @davidsneighbour's skills
 

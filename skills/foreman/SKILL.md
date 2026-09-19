@@ -36,11 +36,8 @@ If the user supplies a broad category or topic without a concrete action, show o
 ### Git and GitHub
 
 * `commit` — write a Git commit message that follows the Conventional Commits specification.
-* `labels` — classify issues with the repository label taxonomy.
-* `select-next-issue` — select one suitable open issue without implementing it.
-* `work-on-issue` — implement one explicitly selected GitHub issue.
-* `work-on-next-issue` — select and implement the next suitable issue.
-* `work-through-issues` — repeatedly select and implement actionable issues until none remain.
+* `issues` — inspect, select, or work through project issues using Patrick's GitHub-first workflow.
+* `labels` — classify issues with Patrick's category:value label taxonomy.
 
 ## Routing
 
@@ -59,13 +56,13 @@ If the user supplies a broad category or topic without a concrete action, show o
 * `foreman agent instructions` → `agent-instructions-audit`
 * `foreman status` or `foreman report` → `project-state-report`
 * `foreman resume` → `resume-interrupted-work`
-* `foreman issues select` → `select-next-issue`
-* `foreman issues next` → `work-on-next-issue`
-* `foreman issues all` → `work-through-issues`
+* `foreman issues`, `foreman issues select`, `foreman issues next`, or `foreman issues all` → `issues`
+* `foreman issues 123` → `issues`
 * `foreman issues labels` → `labels`
 * `foreman issues sync` → `project-task-triage`
 * `foreman commit` → `commit`
-* a specific issue number, such as `foreman issues 123` → `work-on-issue`
+
+The `issues` skill infers inspect, select, specific-issue, next-issue, or continuous behaviour from the user's wording. Foreman does not need separate routing targets for those operations.
 
 ## Rules
 

@@ -18,16 +18,13 @@
         "./skills/agent-instructions-audit",
         "./skills/commit",
         "./skills/dependency-maintenance",
+        "./skills/issues",
         "./skills/labels",
         "./skills/manage-node-version-policy",
         "./skills/osv-scan",
         "./skills/project-state-report",
         "./skills/project-task-triage",
-        "./skills/resume-interrupted-work",
-        "./skills/select-next-issue",
-        "./skills/work-on-issue",
-        "./skills/work-on-next-issue",
-        "./skills/work-through-issues"
+        "./skills/resume-interrupted-work"
       ]
     }
   ]
