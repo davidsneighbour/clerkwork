@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.2.0](https://github.com/davidsneighbour/clerkwork/compare/v1.1.0...v1.2.0) (2026-09-19)
+
+### Feat
+
+* **agent-align:** use Claude native AGENTS.md support ([9c20dda](https://github.com/davidsneighbour/clerkwork/commit/9c20dda4f5eaefb275823d5bb8e71b6af4da352f)), closes [#7](https://github.com/davidsneighbour/clerkwork/issues/7)
+* **apparatus:** add Apparatus to the skill collection ([61ebf70](https://github.com/davidsneighbour/clerkwork/commit/61ebf703428ea344e49186e63942e974679c953d))
+* **clerkwork-agent-instructions-audit:** add instruction context audit ([fab5051](https://github.com/davidsneighbour/clerkwork/commit/fab5051055a61b1671afaa1339ff11669add13c2)), closes [#5](https://github.com/davidsneighbour/clerkwork/issues/5)
+* **foreman:** simplify Clerkwork skill discovery ([ac75825](https://github.com/davidsneighbour/clerkwork/commit/ac7582545c2a89c33d51287b9ac14c3d7c83f9a9)), closes [#6](https://github.com/davidsneighbour/clerkwork/issues/6)
+* **issues:** unify GitHub issue workflows ([7d7edf1](https://github.com/davidsneighbour/clerkwork/commit/7d7edf11887566340280b303a71439cf57886c94)), closes [#8](https://github.com/davidsneighbour/clerkwork/issues/8)
+* **skills:** merge commit drafts and rename github-label-classifier to labels ([040e861](https://github.com/davidsneighbour/clerkwork/commit/040e86162aebeba10b16bfdf889dc8af8437ce5a))
+
+### Fix
+
+* proper project file maintenance and fix workspace configuration format ([51670a1](https://github.com/davidsneighbour/clerkwork/commit/51670a1418944e004efc823cdd0e7017c477a84f)), closes [#1](https://github.com/davidsneighbour/clerkwork/issues/1)
+* **skills:** add OpenAI metadata files ([dbdddc5](https://github.com/davidsneighbour/clerkwork/commit/dbdddc53c6510d8d8058ded57fa2335acec268d5)), closes [#2](https://github.com/davidsneighbour/clerkwork/issues/2), references [#2](https://github.com/davidsneighbour/clerkwork/issues/2)
+* **skills:** drop dnb- prefix from behaviour-spec and quality-gate-organisation ([90c943a](https://github.com/davidsneighbour/clerkwork/commit/90c943a938d93ba537930323a4cb9019155efda8))
+* **skills:** keep PROJECT.md forward-only in project-task-triage ([429395b](https://github.com/davidsneighbour/clerkwork/commit/429395bb6d86577dd6ee6b68ffb48449b4091e64))
+* **skills:** rename clerkwork-shared-configurations to dnbhq-configs ([d03af70](https://github.com/davidsneighbour/clerkwork/commit/d03af70d4022cb385df4907d73a6d64a4f97937c))
+
 ## [1.1.0](https://github.com/davidsneighbour/clerkwork/compare/v1.0.2...v1.1.0) (2026-09-03)
 
 ### Feat
